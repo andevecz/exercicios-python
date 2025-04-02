@@ -13,6 +13,7 @@ resposta = "*"
 while i < len(palavraSecreta):
     letraDigitada = input("Digite uma letra:\n")
     if len(letraDigitada) == 1:
+        tentativas += 1
         if palavraSecreta[i] == letraDigitada:
             if resposta[-1] == '*':
                 resposta = resposta.replace('*','')
