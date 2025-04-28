@@ -28,7 +28,7 @@ def validaCalculoDigitoJ(cpf : str) -> bool:
     
 def validaCalculoDigitoK(cpf : str) -> bool:
     cpf = cpf.replace('-', '.')
-    cpfParcionadoLista = cpf[:12].split('.')
+    cpfParcionadoLista = cpf[:13].split('.')
     cpfParcionado = ''
     resultado = 0
     multiplicador = 11
@@ -69,7 +69,7 @@ def encontraEstado (cpf : str) -> str:
             if cpf[10] == digito:
                 return dicionarioEstados[digito]
 
-CPF_CERTO = '123.456.789-09'
+CPF_CERTO = '732.328.786-36'
 CPF_J_ERRADO = '123.456.789-19'
 CPF_K_ERRADO = '123.456.789-08'
 CPF_FORMATO_ERRADO = '123456.789-09'
