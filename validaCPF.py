@@ -1,51 +1,51 @@
 import re
 
-def validaFormatoCPF (cpf : str) -> bool:
-    regexCPF = r'^\d{3}.\d{3}.\d{3}-[\dXY]{2}$'
-    if re.match(regexCPF, cpf):
-        return True
-    else:
-        return False
-    
-def validaCalculoDigitoJ(cpf : str) -> bool:
-    cpfParcionadoLista = cpf[:11].split('.')
-    cpfParcionado = ''
-    resultado = 0
-    multiplicador = 10
-
-    for partes in cpfParcionadoLista:
-        cpfParcionado += partes
-
-    for digito in cpfParcionado:
-        resultado += int(digito)*multiplicador
-        multiplicador-=1
-    resto = resultado % 11
-    digitoVerificador = str(0 if resto < 2 else 11 - resto)
-    if digitoVerificador == cpf[12]:
-        return True
-    else:
-        return False
-    
-def validaCalculoDigitoK(cpf : str) -> bool:
-    cpf = cpf.replace('-', '.')
-    cpfParcionadoLista = cpf[:13].split('.')
-    cpfParcionado = ''
-    resultado = 0
-    multiplicador = 11
-
-    for partes in cpfParcionadoLista:
-        cpfParcionado += partes
-    for digito in cpfParcionado:
-        resultado += int(digito)*multiplicador
-        multiplicador-=1
-    resto = resultado % 11
-    digitoVerificador = str(0 if resto < 2 else 11 - resto)
-    if digitoVerificador == cpf[13]:
-        return True
-    else:
-        return False
-
 def validaCPF(cpf : str) -> bool:
+    def validaFormatoCPF (cpf : str) -> bool:
+        regexCPF = r'^\d{3}.\d{3}.\d{3}-[\dXY]{2}$'
+        if re.match(regexCPF, cpf):
+            return True
+        else:
+            return False
+        
+    def validaCalculoDigitoJ(cpf : str) -> bool:
+        cpfParcionadoLista = cpf[:11].split('.')
+        cpfParcionado = ''
+        resultado = 0
+        multiplicador = 10
+
+        for partes in cpfParcionadoLista:
+            cpfParcionado += partes
+
+        for digito in cpfParcionado:
+            resultado += int(digito)*multiplicador
+            multiplicador-=1
+        resto = resultado % 11
+        digitoVerificador = str(0 if resto < 2 else 11 - resto)
+        if digitoVerificador == cpf[12]:
+            return True
+        else:
+            return False
+        
+    def validaCalculoDigitoK(cpf : str) -> bool:
+        cpf = cpf.replace('-', '.')
+        cpfParcionadoLista = cpf[:13].split('.')
+        cpfParcionado = ''
+        resultado = 0
+        multiplicador = 11
+
+        for partes in cpfParcionadoLista:
+            cpfParcionado += partes
+        for digito in cpfParcionado:
+            resultado += int(digito)*multiplicador
+            multiplicador-=1
+        resto = resultado % 11
+        digitoVerificador = str(0 if resto < 2 else 11 - resto)
+        if digitoVerificador == cpf[13]:
+            return True
+        else:
+            return False
+    
     if validaFormatoCPF(cpf) and validaCalculoDigitoJ(cpf) and validaCalculoDigitoK(cpf):
         return True
     else:
@@ -69,16 +69,18 @@ def encontraEstado (cpf : str) -> str:
             if cpf[10] == digito:
                 return dicionarioEstados[digito]
 
-CPF_CERTO = '732.328.786-36'
+# Exemplos de CPF para utilizar diretamente no código
+CPF_CERTO = '123.456.789-09'
 CPF_J_ERRADO = '123.456.789-19'
 CPF_K_ERRADO = '123.456.789-08'
 CPF_FORMATO_ERRADO = '123456.789-09'
 
-cpf = CPF_CERTO
-if validaCPF(cpf):
-    print("CPF válido.")
-else:
-    print("CPF inválido.")
+cpf = input("Digite o CPF.\n")
 
-estados = encontraEstado(cpf)
-print(f"Este CPF foi emitido em {estados}.")
+if validaCPF(cpf):
+    estados = encontraEstado(cpf)
+    print("\nCPF válido.")
+    print(f"Este CPF foi emitido em {estados}.")
+else:
+    print("\nCPF inválido.")
+

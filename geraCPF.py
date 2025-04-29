@@ -1,26 +1,26 @@
 import random
 
-def calculaDigitos(cpfParcionado : str) -> str:
-    multiplicador = 10
-    resultado = 0
-    for digito in cpfParcionado:
-        resultado += int(digito)*multiplicador
-        multiplicador-=1
-    resto = resultado % 11
-    digitoVerificadorJ = str(0 if resto < 2 else 11 - resto)
-    cpfParcionado += digitoVerificadorJ
-    
-    multiplicador = 11
-    resultado = 0
-    for digito in cpfParcionado:
-        resultado += int(digito)*multiplicador
-        multiplicador-=1
-    resto = resultado % 11
-    digitoVerificadorK = str(0 if resto < 2 else 11 - resto)
-    cpf = cpfParcionado + digitoVerificadorK
-    return cpf
-
 def geradorCPF() -> str:
+    def calculaDigitos(cpfParcionado : str) -> str:
+        multiplicador = 10
+        resultado = 0
+        for digito in cpfParcionado:
+            resultado += int(digito)*multiplicador
+            multiplicador-=1
+        resto = resultado % 11
+        digitoVerificadorJ = str(0 if resto < 2 else 11 - resto)
+        cpfParcionado += digitoVerificadorJ
+        
+        multiplicador = 11
+        resultado = 0
+        for digito in cpfParcionado:
+            resultado += int(digito)*multiplicador
+            multiplicador-=1
+        resto = resultado % 11
+        digitoVerificadorK = str(0 if resto < 2 else 11 - resto)
+        cpf = cpfParcionado + digitoVerificadorK
+        return cpf
+    
     tamanho = 9
     cpf = ''
     for _ in range(tamanho):
