@@ -12,5 +12,3 @@ quadruplicar = criar_multiplicador(4)
 print(f"Número duplicado : {duplicar(NUMERO_TESTE)}")
 print(f"Número triplicado : {triplicar(NUMERO_TESTE)}")
 print(f"Número quadruplicado : {quadruplicar(NUMERO_TESTE)}")
-
-print(type(duplicar))
