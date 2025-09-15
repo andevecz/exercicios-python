@@ -1,5 +1,6 @@
 import time
 import os
+import json
 
 def listar(lista : list):
     print("Sua lista contém os seguintes valores:\n")
@@ -22,7 +23,15 @@ def refazer(lista : list, aux: list):
         lista.append(itemAux)
         print(f"Item '{itemAux} ' adicionado novamente na lista")
 
-lista = []
+def sair_salvar(lista : list):
+    with open("exercícios/listaTarefas/tarefas.json", "w", encoding="utf8") as file:
+        json.dump(lista, file, indent=2, ensure_ascii=False)
+
+try:
+    with open("exercícios/listaTarefas/tarefas.json", "r", encoding="utf8") as file:
+        lista = json.load(file)
+except FileNotFoundError:
+    lista = []
 aux = []
 
 while True:
@@ -55,6 +64,8 @@ while True:
                 input("\nPRESSIONE ENTER PARA CONTINUAR")
 
             case "/SAIR":
+                sair_salvar(lista)
+                print("\nTarefas salvas em um arquivo JSON!")
                 print("\nObrigado por utillizar o software!")
                 break
 
